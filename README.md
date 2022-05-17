@@ -1,2 +1,14 @@
 # Punto_Blanco
 npm install 
+"bcrypt": "^5.0.1",
+    "cloudinary": "^1.30.0",
+    "concurrently": "^7.2.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.19.0"
