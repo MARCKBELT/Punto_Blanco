@@ -67,7 +67,7 @@ export const createProducto = async (req, res) => {
     });
 
     res.json({
-      message: "Se registo correctamente",
+      message: "Se registo correctamente:",
     });
 
   } catch (error) {
