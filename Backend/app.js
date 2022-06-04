@@ -1,6 +1,7 @@
 import  express from 'express';
 import cors from 'cors';
-
+import morgan from "morgan";
+import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
 
@@ -29,6 +30,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(cookieParser());
 //app.use(fileUpload({useTempFiles :true}))
+
 
 app.use('/tipoUsuario',tipoUsuariosRoutes)
 app.use('/usuario',usuarioRoutes)

@@ -1,7 +1,8 @@
 
 
 import express from 'express';
-import { createProducto, deleteProducto, getAllProducto, getProducto, updateProducto ,upload} from '../controllers/ProductoController.js';
+
+import { photo,createProducto, deleteProducto, getAllProducto, getProducto, updateProducto ,upload} from '../controllers/ProductoController.js';
 
 const router = express.Router()
 
@@ -15,6 +16,7 @@ router.get('/:id', getProducto)
 
 //crear un Producto
 router.post('/register',upload, createProducto)
+router.get ('/Images/:id', photo)
 
 //actualizar Producto 
 router.put('/:id', updateProducto)

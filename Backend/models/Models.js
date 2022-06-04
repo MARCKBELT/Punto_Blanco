@@ -12,8 +12,7 @@ TipoUsuarioModel.hasMany (UsuarioModel,{
 UsuarioModel.belongsTo(TipoUsuarioModel,{
         foreignKey:'id_user'     });
 
-ColorModel.hasMany(ProductoModel, {foreignKey:'id_color'})  ;
-ProductoModel.belongsTo(ColorModel,{foreignKey:'id_color'}) ; 
+
 
 
  MarcaModel.hasMany(ProductoModel,{foreignKey:'id_marca'});
@@ -22,7 +21,8 @@ ProductoModel.belongsTo(ColorModel,{foreignKey:'id_color'}) ;
  TallaModel.hasMany(ProductoModel,{foreignKey:'id_talla'});
 ProductoModel.belongsTo(TallaModel,{foreignKey:'id_talla'});
 
-
+ColorModel.hasMany(ProductoModel, {foreignKey:'id_color'})  ;
+ProductoModel.belongsTo(ColorModel,{foreignKey:'id_color'}) ; 
 
 
 CategoriaModel.hasMany(ProductoModel,{foreignKey:'id_categoria'});

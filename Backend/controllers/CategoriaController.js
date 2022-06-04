@@ -31,9 +31,12 @@ export const getCategoria= async (req, res) => {
 
 // Crear un Registro 
 export const createCategoria = async (req, res) => {
-  //console.log(req.body)
+  
+  console.log("aqui")
+  console.log(req.body)
   try {        
-     await CategoriaModel.findOrCreate({where:{categoria: req.body.categoria}});
+     await CategoriaModel.findOrCreate({
+       where:{categoria:req.body.categoria }});
      
       res.json({
         message: "Se registo correctamente",
