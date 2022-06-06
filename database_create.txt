@@ -1,0 +1,731 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.3
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 04-06-2022 a las 19:41:35
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.5
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Base de datos: `punto_blanco`
+--
+CREATE DATABASE IF NOT EXISTS `punto_blanco` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `punto_blanco`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria`
+--
+-- Creación: 29-04-2022 a las 23:36:13
+--
+
+DROP TABLE IF EXISTS `categoria`;
+CREATE TABLE IF NOT EXISTS `categoria` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Categoria` varchar(50) NOT NULL,
+  `createdAt` date NOT NULL,
+  `updatedAt` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `categoria`:
+--
+
+--
+-- Truncar tablas antes de insertar `categoria`
+--
+
+TRUNCATE TABLE `categoria`;
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `Categoria`, `createdAt`, `updatedAt`) VALUES(1, 'tenis', '2022-05-11', '2022-05-11');
+INSERT INTO `categoria` (`id`, `Categoria`, `createdAt`, `updatedAt`) VALUES(2, 'Polera', '2022-06-01', '2022-06-01');
+INSERT INTO `categoria` (`id`, `Categoria`, `createdAt`, `updatedAt`) VALUES(3, 'Camisa', '2022-06-01', '2022-06-01');
+INSERT INTO `categoria` (`id`, `Categoria`, `createdAt`, `updatedAt`) VALUES(4, 'Deportivo', '2022-06-01', '2022-06-01');
+INSERT INTO `categoria` (`id`, `Categoria`, `createdAt`, `updatedAt`) VALUES(5, 'Bolso', '2022-06-01', '2022-06-01');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `color`
+--
+-- Creación: 03-06-2022 a las 11:14:03
+--
+
+DROP TABLE IF EXISTS `color`;
+CREATE TABLE IF NOT EXISTS `color` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `color` varchar(50) NOT NULL,
+  `codigo` varchar(50) NOT NULL,
+  `createdAt` date NOT NULL,
+  `updatedAt` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `color`:
+--
+
+--
+-- Truncar tablas antes de insertar `color`
+--
+
+TRUNCATE TABLE `color`;
+--
+-- Volcado de datos para la tabla `color`
+--
+
+INSERT INTO `color` (`id`, `color`, `codigo`, `createdAt`, `updatedAt`) VALUES(1, 'ngro', '12313123', '0000-00-00', '0000-00-00');
+INSERT INTO `color` (`id`, `color`, `codigo`, `createdAt`, `updatedAt`) VALUES(12, 'rojo', '#ff0000', '0000-00-00', '0000-00-00');
+INSERT INTO `color` (`id`, `color`, `codigo`, `createdAt`, `updatedAt`) VALUES(13, 'rosado', '213123123', '0000-00-00', '0000-00-00');
+INSERT INTO `color` (`id`, `color`, `codigo`, `createdAt`, `updatedAt`) VALUES(14, 'amarillo', '123123', '0000-00-00', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_pedido`
+--
+-- Creación: 30-04-2022 a las 11:05:43
+--
+
+DROP TABLE IF EXISTS `detalle_pedido`;
+CREATE TABLE IF NOT EXISTS `detalle_pedido` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `precio_compra` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `createdAt` date NOT NULL,
+  `updatedAt` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_producto` (`id_producto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `detalle_pedido`:
+--   `id_producto`
+--       `producto` -> `id`
+--
+
+--
+-- Truncar tablas antes de insertar `detalle_pedido`
+--
+
+TRUNCATE TABLE `detalle_pedido`;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estado`
+--
+-- Creación: 29-04-2022 a las 23:51:23
+--
+
+DROP TABLE IF EXISTS `estado`;
+CREATE TABLE IF NOT EXISTS `estado` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `estado` varchar(100) NOT NULL,
+  `createdAt` date NOT NULL,
+  `updatedAt` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `estado`:
+--
+
+--
+-- Truncar tablas antes de insertar `estado`
+--
+
+TRUNCATE TABLE `estado`;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marca`
+--
+-- Creación: 29-04-2022 a las 23:37:18
+--
+
+DROP TABLE IF EXISTS `marca`;
+CREATE TABLE IF NOT EXISTS `marca` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Marca` varchar(100) NOT NULL,
+  `createdAt` date NOT NULL,
+  `updatedAt` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `marca`:
+--
+
+--
+-- Truncar tablas antes de insertar `marca`
+--
+
+TRUNCATE TABLE `marca`;
+--
+-- Volcado de datos para la tabla `marca`
+--
+
+INSERT INTO `marca` (`id`, `Marca`, `createdAt`, `updatedAt`) VALUES(1, 'Nike', '2022-05-11', '2022-05-11');
+INSERT INTO `marca` (`id`, `Marca`, `createdAt`, `updatedAt`) VALUES(2, 'Adidas', '2022-06-01', '2022-06-01');
+INSERT INTO `marca` (`id`, `Marca`, `createdAt`, `updatedAt`) VALUES(3, 'Rebook', '0000-00-00', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedido`
+--
+-- Creación: 30-04-2022 a las 00:04:45
+--
+
+DROP TABLE IF EXISTS `pedido`;
+CREATE TABLE IF NOT EXISTS `pedido` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `total` decimal(10,0) NOT NULL,
+  `createdAt` date NOT NULL,
+  `updatedAt` date NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_proveedor` int(11) NOT NULL,
+  `id_detalle` int(11) NOT NULL,
+  `id_estado` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_usuario` (`id_usuario`,`id_proveedor`,`id_detalle`,`id_estado`),
+  KEY `id_estado` (`id_estado`),
+  KEY `id_proveedor` (`id_proveedor`),
+  KEY `id_detalle` (`id_detalle`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `pedido`:
+--   `id_estado`
+--       `estado` -> `id`
+--   `id_proveedor`
+--       `proveedor` -> `id`
+--   `id_usuario`
+--       `usuario` -> `id`
+--   `id_detalle`
+--       `detalle_pedido` -> `id`
+--
+
+--
+-- Truncar tablas antes de insertar `pedido`
+--
+
+TRUNCATE TABLE `pedido`;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `producto`
+--
+-- Creación: 03-06-2022 a las 11:21:04
+-- Última actualización: 04-06-2022 a las 13:14:28
+--
+
+DROP TABLE IF EXISTS `producto`;
+CREATE TABLE IF NOT EXISTS `producto` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `producto` varchar(250) NOT NULL,
+  `descripcion` varchar(250) NOT NULL,
+  `image` varchar(250) NOT NULL,
+  `Stock` int(11) NOT NULL,
+  `Precio_Venta` decimal(10,0) NOT NULL,
+  `id_marca` int(11) NOT NULL,
+  `id_talla` int(11) NOT NULL,
+  `id_color` int(11) NOT NULL,
+  `id_categoria` int(11) NOT NULL,
+  `Id_Proveedor` int(11) NOT NULL,
+  `createdAt` date NOT NULL,
+  `updatedAt` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_categoria` (`id_categoria`),
+  KEY `id_talla` (`id_talla`),
+  KEY `Id_Proveedor` (`Id_Proveedor`),
+  KEY `id_marca` (`id_marca`) USING BTREE,
+  KEY `id_color` (`id_color`)
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `producto`:
+--   `id_talla`
+--       `talla` -> `id`
+--   `id_marca`
+--       `marca` -> `id`
+--   `id_categoria`
+--       `categoria` -> `id`
+--   `Id_Proveedor`
+--       `proveedor` -> `id`
+--   `id_color`
+--       `color` -> `id`
+--
+
+--
+-- Truncar tablas antes de insertar `producto`
+--
+
+TRUNCATE TABLE `producto`;
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id`, `producto`, `descripcion`, `image`, `Stock`, `Precio_Venta`, `id_marca`, `id_talla`, `id_color`, `id_categoria`, `Id_Proveedor`, `createdAt`, `updatedAt`) VALUES(115, 'tenis', 'poleta de corta de sss2', 'image-1654255302919.jpg', 101, '122', 1, 1, 1, 1, 1, '2022-06-03', '2022-06-03');
+INSERT INTO `producto` (`id`, `producto`, `descripcion`, `image`, `Stock`, `Precio_Venta`, `id_marca`, `id_talla`, `id_color`, `id_categoria`, `Id_Proveedor`, `createdAt`, `updatedAt`) VALUES(116, 'Polera', 'Polera manga corta adidas camuflada', 'image-1654276254760.jpg', 101, '156', 2, 1, 1, 2, 1, '2022-06-03', '2022-06-03');
+INSERT INTO `producto` (`id`, `producto`, `descripcion`, `image`, `Stock`, `Precio_Venta`, `id_marca`, `id_talla`, `id_color`, `id_categoria`, `Id_Proveedor`, `createdAt`, `updatedAt`) VALUES(117, 'Tenis', 'TEnis confortable ', 'image-1654276254760.jpg', 25, '350', 3, 1, 13, 1, 1, '0000-00-00', '0000-00-00');
+INSERT INTO `producto` (`id`, `producto`, `descripcion`, `image`, `Stock`, `Precio_Venta`, `id_marca`, `id_talla`, `id_color`, `id_categoria`, `Id_Proveedor`, `createdAt`, `updatedAt`) VALUES(121, 'Tenis', 'Tenis de mujer confortable full sport ', 'image-1654303939766.jpg', 100, '250', 3, 1, 13, 1, 1, '2022-06-04', '2022-06-04');
+INSERT INTO `producto` (`id`, `producto`, `descripcion`, `image`, `Stock`, `Precio_Venta`, `id_marca`, `id_talla`, `id_color`, `id_categoria`, `Id_Proveedor`, `createdAt`, `updatedAt`) VALUES(122, 'Polera', 'Pelera color verde', 'image-1654305101259.jpg', 100, '250', 3, 1, 13, 1, 1, '2022-06-04', '2022-06-04');
+INSERT INTO `producto` (`id`, `producto`, `descripcion`, `image`, `Stock`, `Precio_Venta`, `id_marca`, `id_talla`, `id_color`, `id_categoria`, `Id_Proveedor`, `createdAt`, `updatedAt`) VALUES(123, 'Tenis', 'Tenis confortable ', 'image-1654347368189.jpg', 100, '250', 3, 1, 13, 1, 1, '2022-06-04', '2022-06-04');
+INSERT INTO `producto` (`id`, `producto`, `descripcion`, `image`, `Stock`, `Precio_Venta`, `id_marca`, `id_talla`, `id_color`, `id_categoria`, `Id_Proveedor`, `createdAt`, `updatedAt`) VALUES(124, 'Polera', 'Polera', 'image-1654347439507.jpg', 100, '250', 3, 1, 1, 1, 1, '2022-06-04', '2022-06-04');
+INSERT INTO `producto` (`id`, `producto`, `descripcion`, `image`, `Stock`, `Precio_Venta`, `id_marca`, `id_talla`, `id_color`, `id_categoria`, `Id_Proveedor`, `createdAt`, `updatedAt`) VALUES(125, 'Polera', 'Polera', 'image-1654348370479.jpg', 100, '250', 3, 1, 1, 1, 1, '2022-06-04', '2022-06-04');
+INSERT INTO `producto` (`id`, `producto`, `descripcion`, `image`, `Stock`, `Precio_Venta`, `id_marca`, `id_talla`, `id_color`, `id_categoria`, `Id_Proveedor`, `createdAt`, `updatedAt`) VALUES(126, 'Polera', 'Polera', 'image-1654348468194.jpg', 100, '250', 3, 1, 1, 1, 1, '2022-06-04', '2022-06-04');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proveedor`
+--
+-- Creación: 29-04-2022 a las 23:40:10
+--
+
+DROP TABLE IF EXISTS `proveedor`;
+CREATE TABLE IF NOT EXISTS `proveedor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(150) NOT NULL,
+  `telefono` int(11) NOT NULL,
+  `direccion` varchar(150) NOT NULL,
+  `createdAt` date NOT NULL,
+  `updatedAt` date NOT NULL,
+  `ci` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `proveedor`:
+--
+
+--
+-- Truncar tablas antes de insertar `proveedor`
+--
+
+TRUNCATE TABLE `proveedor`;
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`id`, `nombre`, `telefono`, `direccion`, `createdAt`, `updatedAt`, `ci`) VALUES(1, 'MArleni Cuentas Alejo', 2222, 'calle MArlene', '0000-00-00', '0000-00-00', 6071176);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `talla`
+--
+-- Creación: 11-05-2022 a las 01:09:59
+--
+
+DROP TABLE IF EXISTS `talla`;
+CREATE TABLE IF NOT EXISTS `talla` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Talla` varchar(50) NOT NULL,
+  `createdAt` date NOT NULL,
+  `updatedAt` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `talla`:
+--
+
+--
+-- Truncar tablas antes de insertar `talla`
+--
+
+TRUNCATE TABLE `talla`;
+--
+-- Volcado de datos para la tabla `talla`
+--
+
+INSERT INTO `talla` (`id`, `Talla`, `createdAt`, `updatedAt`) VALUES(1, 'XL', '2022-05-11', '2022-05-11');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_usuario`
+--
+-- Creación: 02-05-2022 a las 12:15:24
+--
+
+DROP TABLE IF EXISTS `tipo_usuario`;
+CREATE TABLE IF NOT EXISTS `tipo_usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_user` varchar(100) NOT NULL,
+  `createdAt` date NOT NULL,
+  `updatedAt` date NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `tipo_usuario`:
+--
+
+--
+-- Truncar tablas antes de insertar `tipo_usuario`
+--
+
+TRUNCATE TABLE `tipo_usuario`;
+--
+-- Volcado de datos para la tabla `tipo_usuario`
+--
+
+INSERT INTO `tipo_usuario` (`id`, `tipo_user`, `createdAt`, `updatedAt`) VALUES(1, 'Administrador', '2022-04-30', '2022-04-30');
+INSERT INTO `tipo_usuario` (`id`, `tipo_user`, `createdAt`, `updatedAt`) VALUES(2, 'User', '2022-04-30', '2022-04-30');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+-- Creación: 13-05-2022 a las 00:47:49
+--
+
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(150) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `direccion` varchar(150) NOT NULL,
+  `ci` int(11) NOT NULL,
+  `telefono` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `password` varchar(150) NOT NULL,
+  `createdAt` date NOT NULL,
+  `updatedAt` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELACIONES PARA LA TABLA `usuario`:
+--
+
+--
+-- Truncar tablas antes de insertar `usuario`
+--
+
+TRUNCATE TABLE `usuario`;
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nombre`, `email`, `direccion`, `ci`, `telefono`, `id_user`, `password`, `createdAt`, `updatedAt`) VALUES(73, 'Kamila', 'kamila@gmail.com', 'cale kamila', 43445, 1222, 2, '$2b$10$9agw7cy8fovc8zkn8qMqL.aEXPZ75BySZskm5.gDal3dR7mAG4//2', '2022-05-13', '2022-05-13');
+INSERT INTO `usuario` (`id`, `nombre`, `email`, `direccion`, `ci`, `telefono`, `id_user`, `password`, `createdAt`, `updatedAt`) VALUES(74, 'ainara', 'ainara@gmail.com', 'cale kamila', 434453, 12223, 2, '$2b$10$xlAxi3p2vCGtq9sUs8Kcuum5ib4ZkI00co/AiOWRuCbDIyVuWwNmu', '2022-05-13', '2022-05-13');
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `detalle_pedido`
+--
+ALTER TABLE `detalle_pedido`
+  ADD CONSTRAINT `detalle_pedido_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`);
+
+--
+-- Filtros para la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estado` (`id`),
+  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pedido_ibfk_4` FOREIGN KEY (`id_detalle`) REFERENCES `detalle_pedido` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_talla`) REFERENCES `talla` (`id`),
+  ADD CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`id_marca`) REFERENCES `marca` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `producto_ibfk_3` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `producto_ibfk_5` FOREIGN KEY (`Id_Proveedor`) REFERENCES `proveedor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `producto_ibfk_6` FOREIGN KEY (`id_color`) REFERENCES `color` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+--
+-- Metadatos
+--
+USE `phpmyadmin`;
+
+--
+-- Metadatos para la tabla categoria
+--
+
+--
+-- Truncar tablas antes de insertar `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncar tablas antes de insertar `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncar tablas antes de insertar `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadatos para la tabla color
+--
+
+--
+-- Truncar tablas antes de insertar `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncar tablas antes de insertar `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncar tablas antes de insertar `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadatos para la tabla detalle_pedido
+--
+
+--
+-- Truncar tablas antes de insertar `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncar tablas antes de insertar `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncar tablas antes de insertar `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadatos para la tabla estado
+--
+
+--
+-- Truncar tablas antes de insertar `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncar tablas antes de insertar `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncar tablas antes de insertar `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadatos para la tabla marca
+--
+
+--
+-- Truncar tablas antes de insertar `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncar tablas antes de insertar `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncar tablas antes de insertar `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadatos para la tabla pedido
+--
+
+--
+-- Truncar tablas antes de insertar `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncar tablas antes de insertar `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncar tablas antes de insertar `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadatos para la tabla producto
+--
+
+--
+-- Truncar tablas antes de insertar `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncar tablas antes de insertar `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncar tablas antes de insertar `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadatos para la tabla proveedor
+--
+
+--
+-- Truncar tablas antes de insertar `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncar tablas antes de insertar `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncar tablas antes de insertar `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadatos para la tabla talla
+--
+
+--
+-- Truncar tablas antes de insertar `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncar tablas antes de insertar `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncar tablas antes de insertar `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadatos para la tabla tipo_usuario
+--
+
+--
+-- Truncar tablas antes de insertar `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncar tablas antes de insertar `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncar tablas antes de insertar `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadatos para la tabla usuario
+--
+
+--
+-- Truncar tablas antes de insertar `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncar tablas antes de insertar `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncar tablas antes de insertar `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadatos para la base de datos punto_blanco
+--
+
+--
+-- Truncar tablas antes de insertar `pma__bookmark`
+--
+
+TRUNCATE TABLE `pma__bookmark`;
+--
+-- Truncar tablas antes de insertar `pma__relation`
+--
+
+TRUNCATE TABLE `pma__relation`;
+--
+-- Truncar tablas antes de insertar `pma__pdf_pages`
+--
+
+TRUNCATE TABLE `pma__pdf_pages`;
+--
+-- Volcado de datos para la tabla `pma__pdf_pages`
+--
+
+INSERT INTO `pma__pdf_pages` (`db_name`, `page_descr`) VALUES('punto_blanco', 'diseño');
+
+SET @LAST_PAGE = LAST_INSERT_ID();
+
+--
+-- Truncar tablas antes de insertar `pma__table_coords`
+--
+
+TRUNCATE TABLE `pma__table_coords`;
+--
+-- Volcado de datos para la tabla `pma__table_coords`
+--
+
+INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('punto_blanco', 'categoria', @LAST_PAGE, 141, 441);
+INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('punto_blanco', 'color', @LAST_PAGE, 117, 305);
+INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('punto_blanco', 'detalle_pedido', @LAST_PAGE, 634, 363);
+INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('punto_blanco', 'estado', @LAST_PAGE, 1229, 159);
+INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('punto_blanco', 'marca', @LAST_PAGE, 109, 47);
+INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('punto_blanco', 'pedido', @LAST_PAGE, 927, 74);
+INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('punto_blanco', 'producto', @LAST_PAGE, 402, 134);
+INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('punto_blanco', 'proveedor', @LAST_PAGE, 692, 70);
+INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('punto_blanco', 'talla', @LAST_PAGE, 119, 175);
+INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('punto_blanco', 'tipo_usuario', @LAST_PAGE, 678, 567);
+INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('punto_blanco', 'usuario', @LAST_PAGE, 1000, 450);
+
+--
+-- Truncar tablas antes de insertar `pma__savedsearches`
+--
+
+TRUNCATE TABLE `pma__savedsearches`;
+--
+-- Truncar tablas antes de insertar `pma__central_columns`
+--
+
+TRUNCATE TABLE `pma__central_columns`;COMMIT;
