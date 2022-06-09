@@ -15,14 +15,15 @@ import { DataTypes} from "sequelize";
           } */},
         direccion: { type: DataTypes.STRING },
         ci: { type: DataTypes.INTEGER },
-        telefono: { type: DataTypes.INTEGER },
-        id_user:{ type: DataTypes.INTEGER},
+        telefono: { type: DataTypes.INTEGER ,},
+        id_user:{ type: DataTypes.INTEGER,
+        defaultValue:2},
         password: { type: DataTypes.STRING,required:true },
 
 
 
     },{})
-
+    
   
 console.log (UsuarioModel)
 export default UsuarioModel

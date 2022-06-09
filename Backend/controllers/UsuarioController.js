@@ -1,6 +1,7 @@
 
 import jwt  from "jsonwebtoken";
 import bcrypt from  "bcrypt"
+import config from '../config.js'
 import {Op} from "sequelize"
 //importamos el modelos
 
@@ -43,17 +44,8 @@ export const getUsuario = async (req, res) => {
 };
 
 
+
 export const createUsuario = async (req, res) =>{
-  try{
-
-  }
-  catch{
-
-  }
-
-}
-
-/* export const createUsuario = async (req, res) =>{
   const {email}=req.body
   console.log (email)
   try {
@@ -63,7 +55,7 @@ export const createUsuario = async (req, res) =>{
     
       const user = await UsuarioModel.findAll({
         where: {
-            email:req.params.email
+            email:req.body.email
         }
       })
       console.log (user)
@@ -76,19 +68,20 @@ export const createUsuario = async (req, res) =>{
       // Password Encryption
       const passwordHash = await bcrypt.hash(password, 10)
       const newUser = new UsuarioModel({
-        nombre, direccion,email, ci, telefono, id_user, password:passwordHash
+        nombre, direccion,email, ci, telefono, id_user:{default:2}, password:passwordHash
       })
 
-      //save en Mtsql 
+      //Almacenamiento  en Mysql 
 
-      await UsuarioModel.create({
+      const saveUser = await UsuarioModel.create({
         nombre, direccion,email, ci, telefono, id_user, password:passwordHash
-      });
-    res.json({
-      message: "Registro creado correctamente",
-    }); */
+      }); 
+    //creamos el token que expira en 12 horas 
+    const token =jwt.sign({id:saveUser.id},config.SECRET,{expiresIn:43200})
+    res.json(
+      {token});
 
-    /*   // Then create jsonwebtoken to authentication
+    /* // Then create jsonwebtoken to authentication
       const accesstoken = createAccessToken({id: newUser._id}) 
      const refreshtoken = createRefreshToken({id: newUser._id})
 
@@ -98,119 +91,12 @@ export const createUsuario = async (req, res) =>{
           maxAge: 7*24*60*60*1000 // 7d
       }) 
 
-      res.json({accesstoken}) 
+      res.json({accesstoken}) */ 
 
   } catch (error) {
     res.json({ message: error.message });
   }
 }
-*/
-
-
-
-
-
-
-
-
-
-/* 
-
-// Crear un Registro
-export const createUsuario = async (req,res) =>{
-  console.log(req.body)
-  try {
-    const { nombre,email,direccion,ci,telefono,id_user,password} = req.body;
-    
-
-      const user = await UsuarioModel.findAll({
-        where: {
-          email:email
-        }
-      })
-      if(user.length>0) return res.status(400).json({msg: "The email already exists."})
-
-      if(password.length < 6) 
-          return res.status(400).json({msg: "Password is at least 6 characters long."})
-
-      // Password Encryption
-      const passwordHash = await bcrypt.hash(password, 10)
-      const newUser = new UsuarioModel({
-        nombre,email, direccion, ci, telefono, id_user, password:passwordHash
-      })
-
-      //save en Mtsql 
-
-      await UsuarioModel.create({
-        nombre, email, direccion, ci, telefono, id_user, password:passwordHash
-      });
-    res.json({
-      message: "Registro creado correctamente",
-    });
-
-      // Then create jsonwebtoken to authentication
-      const accesstoken = createAccessToken({id: newUser._id}) 
-     const refreshtoken = createRefreshToken({id: newUser._id})
-
-      res.cookie('refreshtoken', refreshtoken, {
-          httpOnly: true,
-          path: '/user/refresh_token',//  /user/refresh_token
-          maxAge: 7*24*60*60*1000 // 7d
-      }) 
-
-      res.json({accesstoken})
-
-  } catch (error) {
-    res.json({ messagesdfsdf: error.message });
-  }
-} */
-
-/*
-export const createUsuario = async (req, res) => {
-  try {
-    const { nombre, direccion,email, ci, telefono, id_user, password } = req.body;
-    if(password.length < 6) 
-    return res.status(400).json({msg: "Password is at least 6 characters long."})
-
-    // Password Encryption
-    const passwordHash = await bcrypt.hash(password, 10)
-
-    const user = await UsuarioModel.findOrCreate({
-      where: { ci: req.body.ci },
-      defaults: {
-        nombre,
-        direccion,
-        email,
-        ci,
-        telefono,
-        id_user,
-        password:passwordHash,
-      },
-      
-    });
-
-    // Then create jsonwebtoken to authentication
-    const accesstoken = createAccessToken({id: newUser._id})
-    const refreshtoken = createRefreshToken({id: newUser._id})
-
-    res.cookie('refreshtoken', refreshtoken, {
-        httpOnly: true,
-        path: '/user/refresh_token',
-        maxAge: 7*24*60*60*1000 // 7d
-    })
-
-    res.json({accesstoken})
-
-    //await UsuarioModel.create(req.body);
-
-    res.json({
-      message: "Se registo correctamente",
-    });
-  } catch (error) {
-    res.json({ message2: error.message });
-  }
-};
-console.log(createUsuario); */
 
 //Actualizar un registro
 export const updateUsuario = async (req, res) => {
@@ -228,6 +114,8 @@ export const updateUsuario = async (req, res) => {
   }
 };
 
+
+
 //Eliminar un Register
 export const deleteUsuario = async (req, res) => {
   try {
@@ -243,9 +131,7 @@ export const deleteUsuario = async (req, res) => {
     res.json({ message: error.message });
   }
 };
-/* UsuarioModel.associate = (models) => {
-  UsuarioModel.belongsToMany(models.tipoUsuarioModel, {});
-}; */
+
 
 
 export const login=  async (req, res) =>{

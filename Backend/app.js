@@ -4,7 +4,7 @@ import morgan from "morgan";
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
-
+import { createRoles } from './libs/initialSetup.js';
 //importamos la conexxion a db
 import db from './database/db.js';
 
@@ -16,15 +16,18 @@ import categoriaRoutes from "./routes/RoutesCategoria.js";
 import colorRoutes from './routes/RoutesColor.js';
 import marcaRoutes from './routes/RoutesMarca.js'
 import tallaRoutes from './routes/RoutesTalla.js';
+import authRoutes from './routes/RoutesAuth.js'
 
 
 //console.log ('aquiiiiii')
 //console.log (tipoUsuariosRoutes.stack[1].route)
 
-const app  = express()
+const app  = express();
+createRoles();
 
 app.use(cors())
-app.use(express.json())
+app.use(express.json())//convierte las peticiones a JSON REQ.body
+app.use(morgan())
 
 app.use(express.urlencoded({ extended: true }))
 
@@ -40,6 +43,9 @@ app.use('/categoria',categoriaRoutes)
 app.use('/color',colorRoutes)
 app.use('/marca',marcaRoutes)
 app.use('/talla',tallaRoutes)
+
+
+app.use('/auth',authRoutes)
 
 try {
     await db.authenticate()

@@ -1,4 +1,4 @@
-
+import {verifyToken,isAdmin,isProveedor,isUser,isProvOrAdmin} from '../middleware/index.js';
 
 import express from 'express';
 
@@ -15,14 +15,14 @@ router.get('/', getAllProducto)
 router.get('/:id', getProducto)
 
 //crear un Producto
-router.post('/register',upload, createProducto)
+router.post('/register',[verifyToken,isProvOrAdmin],upload, createProducto)
 router.get ('/Images/:id', photo)
 
 //actualizar Producto 
-router.put('/:id', updateProducto)
+router.put('/:id', [verifyToken,isAdmin],updateProducto)
 
 //Eliminar Producto 
-router.delete('/:id', deleteProducto)
+router.delete('/:id', [verifyToken,isProvOrAdmin],deleteProducto)
 
 
 

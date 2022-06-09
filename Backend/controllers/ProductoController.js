@@ -100,6 +100,8 @@ export const updateProducto = async (req, res) => {
 
 //Eliminar un Register
 export const deleteProducto = async (req, res) => {
+  
+
   try {
     await ProductoModel.destroy({
       where: {

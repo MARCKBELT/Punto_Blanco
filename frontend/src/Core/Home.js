@@ -4,13 +4,14 @@ import NavBar from './layout/NavBar'
 import { getProducts } from './ApiCore';
 import Card from './Card';
 
-import Fondo from "../Imagenes/Fondo.webp"
+import Fondo from "../Imagenes/fondo.jpg"
 
 const Home = () => {
 
   //funciones ára el estado
 
   //funciones de la Api
+  console.log(getProducts)
 
   {
     const [products, setProducts] = useState([]);
@@ -40,11 +41,10 @@ const Home = () => {
 
         <div >
           <div >
-            <a className="navbar-brand " href="/"> <img src={Fondo} className="modalBackground cover w-100 opacity-25 mg-thumbnail m-0" alt="Logo" /></a>
+            <a className="navbar-brand" > <img src={Fondo} className="modalBackground cover w-100 opacity-25 mg-thumbnail m-0" alt="Logo" /></a>
           </div >
           <div className="container">
-            <div className="row  ">
-
+            <div className="row">
               {products.map((producto, i) => (
                 <div key={i} className=" col-lg-3 col-md-6 col-sm-6 col-sm-6">
                   <Card producto={producto} />

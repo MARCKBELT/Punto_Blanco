@@ -13,8 +13,6 @@ UsuarioModel.belongsTo(TipoUsuarioModel,{
         foreignKey:'id_user'     });
 
 
-
-
  MarcaModel.hasMany(ProductoModel,{foreignKey:'id_marca'});
  ProductoModel.belongsTo(MarcaModel,{foreignKey:'id_marca'});
 
